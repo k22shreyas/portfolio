@@ -26,14 +26,12 @@
       align-items: center;
     }
 
-    /* Navbar */
     nav {
       width: 100%;
       background-color: var(--crimson);
       display: flex;
       justify-content: center;
       padding: 1rem 0;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       position: sticky;
       top: 0;
       z-index: 10;
@@ -43,6 +41,7 @@
       display: flex;
       list-style: none;
       gap: 2rem;
+      flex-wrap: wrap;
     }
 
     nav a {
@@ -57,7 +56,6 @@
       opacity: 0.7;
     }
 
-    /* Header/Profile Section */
     header {
       text-align: center;
       margin-top: 2rem;
@@ -76,18 +74,24 @@
     h1 {
       font-size: 2rem;
       color: var(--crimson);
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 1rem;
     }
 
     p {
-      max-width: 600px;
+      max-width: 800px;
       margin: 1rem auto;
       line-height: 1.6;
       font-size: 1rem;
     }
 
-    /* Sections */
     section {
-      max-width: 800px;
+      max-width: 900px;
       width: 90%;
       margin: 2rem auto;
       padding: 1.5rem;
@@ -99,16 +103,54 @@
     section h2 {
       margin-bottom: 1rem;
       color: var(--crimson);
+      border-bottom: 2px solid var(--crimson);
+      padding-bottom: 0.5rem;
     }
 
-    section a {
+    ul {
+      margin-left: 1.5rem;
+      line-height: 1.6;
+    }
+
+    a {
       color: var(--crimson);
       text-decoration: none;
       font-weight: 600;
     }
 
-    section a:hover {
+    a:hover {
       text-decoration: underline;
+    }
+
+    .education-item, .experience-item, .project-item {
+      margin-bottom: 1rem;
+    }
+
+    .title-line {
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .title-line span {
+      font-weight: normal;
+      font-size: 0.95rem;
+      color: #666;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .skills-grid div {
+      background-color: var(--cream);
+      padding: 0.5rem;
+      border-left: 4px solid var(--crimson);
+      border-radius: 4px;
     }
 
     footer {
@@ -119,11 +161,14 @@
       margin-top: 2rem;
     }
 
-    @media (max-width: 600px) {
-      nav ul {
-        flex-direction: column;
-        gap: 1rem;
-      }
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .contact-info a {
+      word-break: break-all;
     }
   </style>
 </head>
@@ -132,9 +177,11 @@
   <!-- Navbar -->
   <nav>
     <ul>
-      <li><a href="#contact">Contact Me</a></li>
-      <li><a href="#resume">Resume</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Work Experience</a></li>
       <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
 
@@ -142,25 +189,113 @@
   <header>
     <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-pic" />
     <h1>Shreyas Karanam</h1>
-    <p>Welcome to my personal portfolio! I’m passionate about learning, building projects, and growing as a developer. Feel free to explore my work, check my resume, or get in touch below.</p>
+    <p class="subtitle">Aspiring Software Engineer | Computer Science @ Indiana University</p>
+    <p>Welcome to my personal portfolio! I'm passionate about learning, building scalable systems, and contributing to impactful projects. Below, you’ll find my education, skills, experience, and personal work.</p>
   </header>
 
-  <!-- Resume Section -->
-  <section id="resume">
-    <h2>Resume</h2>
-    <p>You can <a href="#" target="_blank">download my resume here</a> (link to be added).</p>
+  <!-- Education -->
+  <section id="education">
+    <h2>Education</h2>
+    <div class="education-item">
+      <div class="title-line">
+        <div>Indiana University Bloomington — M.S. Computer Science (GPA: 3.9/4.0)</div>
+        <span>Aug 2025 – May 2027 | Indiana, USA</span>
+      </div>
+    </div>
+    <div class="education-item">
+      <div class="title-line">
+        <div>Visveshwaraiah Technological University — B.E. Computer Science (GPA: 3.5/4.0)</div>
+        <span>Aug 2018 – Jul 2022 | Bangalore, India</span>
+      </div>
+    </div>
   </section>
 
-  <!-- Projects Section -->
+  <!-- Skills -->
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div><strong>Programming & Systems:</strong> C++ (v11/v14/v17), Python, Shell, Java, 5G & Network Protocols</div>
+      <div><strong>Frameworks & Databases:</strong> PySpark, Hadoop, PostgreSQL, Node.js, React.js, Express.js, MongoDB, HTML/CSS</div>
+      <div><strong>DevOps & Cloud:</strong> Linux, Git, Jenkins, Docker, Kubernetes, AWS, CI/CD</div>
+      <div><strong>Tools & Testing:</strong> GTest, FUSE, Selenium, Cypress, Playwright, REST APIs</div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section id="experience">
+    <h2>Work Experience</h2>
+
+    <div class="experience-item">
+      <div class="title-line">
+        <div>Graduate Teaching Assistant — Indiana University Bloomington</div>
+        <span>Aug 2025 – Present | Indiana, USA</span>
+      </div>
+      <ul>
+        <li>Assisting professors mentoring Informatics capstone teams (PHP, MySQL, UI/UX).</li>
+        <li>Scrum Master: planning weekly stand-ups and tracking project progress.</li>
+        <li>Supporting students with technical challenges & collaboration guidance.</li>
+      </ul>
+    </div>
+
+    <div class="experience-item">
+      <div class="title-line">
+        <div>Software Engineer — Nokia Solutions and Networks</div>
+        <span>Oct 2024 – Jul 2025 | Bangalore, India</span>
+      </div>
+      <ul>
+        <li>Developed Supercell feature for 5G gNodeB User-Plane scheduler in C++.</li>
+        <li>Maintained Unit/System tests using FUSE, increasing coverage & early detection.</li>
+        <li>Extended L1/L2 stubs for integration testing and debugged with Wireshark & gdb.</li>
+      </ul>
+    </div>
+
+    <div class="experience-item">
+      <div class="title-line">
+        <div>Associate Software Engineer — Bosch Global Software Technologies</div>
+        <span>Aug 2022 – Sep 2024 | Bangalore, India</span>
+      </div>
+      <ul>
+        <li>Integrated HMI features (Bluetooth/Wi-Fi) enabling iOS/Android connectivity.</li>
+        <li>Developed back-end in C++ for HMI APIs and vehicle interface systems.</li>
+        <li>Handled development server incidents ensuring minimal downtime.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Projects -->
   <section id="projects">
-    <h2>Projects</h2>
-    <p>Coming soon... 🚀</p>
+    <h2>Personal Projects</h2>
+
+    <div class="project-item">
+      <div class="title-line">
+        <div><strong>Automated Result Analysis</strong> — Python, Flask, Selenium, Google OCR</div>
+      </div>
+      <ul>
+        <li>Automated tool to retrieve and analyze university results.</li>
+        <li>Used Tesseract-OCR for CAPTCHA and Flask for interactive frontend.</li>
+      </ul>
+    </div>
+
+    <div class="project-item">
+      <div class="title-line">
+        <div><strong>Ristorante</strong> — NodeJS, MongoDB, ReactJS, REST API</div>
+      </div>
+      <ul>
+        <li>Developed a scalable web app for restaurant reviews.</li>
+        <li>Used Node.js + Express + MongoDB backend and ReactJS frontend.</li>
+      </ul>
+    </div>
   </section>
 
-  <!-- Contact Section -->
+  <!-- Contact -->
   <section id="contact">
-    <h2>Contact Me</h2>
-    <p>Email: <a href="mailto:example@example.com">example@example.com</a></p>
+    <h2>Contact</h2>
+    <div class="contact-info">
+      <div><strong>Email:</strong> <a href="mailto:skarana@iu.edu">skarana@iu.edu</a> | <a href="mailto:k22shreyas@gmail.com">k22shreyas@gmail.com</a></div>
+      <div><strong>Phone:</strong> <a href="tel:+18126793360">+1 (812) 679-3360</a></div>
+      <div><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/k22shreyas" target="_blank">linkedin.com/in/k22shreyas</a></div>
+      <div><strong>GitHub:</strong> <a href="https://github.com/k22shreyas" target="_blank">github.com/k22shreyas</a></div>
+    </div>
   </section>
 
   <footer>
