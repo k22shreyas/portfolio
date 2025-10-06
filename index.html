@@ -98,6 +98,7 @@
       background: white;
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      scroll-margin-top: 80px;
     }
 
     section h2 {
@@ -139,6 +140,32 @@
       color: #666;
     }
 
+    .edu-entry {
+      margin-bottom: 1.5rem;
+    }
+    
+    .edu-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+    }
+    
+    .edu-row .left {
+      font-weight: 600;
+    }
+    
+    .edu-row .right {
+      font-size: 0.95rem;
+      color: #555;
+      text-align: right;
+    }
+    
+    .edu-row + .edu-row {
+      margin-top: 0.25rem;
+      font-weight: normal;
+    }
+
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -155,10 +182,12 @@
 
     footer {
       text-align: center;
-      padding: 1rem;
+      padding: 0.5rem;
       background-color: var(--crimson);
       color: var(--cream);
       margin-top: 2rem;
+      font-size: 0.8rem;
+      opacity: 0.8;
     }
 
     .contact-info {
@@ -195,21 +224,26 @@
 
   <!-- Education -->
   <section id="education">
-    <h2>Education</h2>
-    <div class="education-item">
-      <div class="title-line">
-        <div>Indiana University Bloomington</div>
-        <span>Aug 2025 – May 2027</span>
-        <div>M.S. Computer Science (GPA: 3.9/4.0)</div>
-        <span>Bloomington, Indiana, United States</span>
+  <h2>Education</h2>
+    <div class="edu-entry">
+      <div class="edu-row">
+        <div class="left">Indiana University Bloomington</div>
+        <div class="right">Aug 2025 – May 2027</div>
+      </div>
+      <div class="edu-row">
+        <div class="left">Master of Science in Computer Science (GPA: 3.9/4.0)</div>
+        <div class="right">Bloomington, Indiana, USA</div>
       </div>
     </div>
-    <div class="education-item">
-      <div class="title-line">
-        <div>Visveshwaraiah Technological University</div>
-        <span>Aug 2018 – Jul 2022</span>
-        <div>B.E. Computer Science (GPA: 3.5/4.0)</div>
-        <span>Bangalore, Karnataka, India</span>
+  
+    <div class="edu-entry">
+      <div class="edu-row">
+        <div class="left">Visveshwaraiah Technological University</div>
+        <div class="right">Aug 2018 – Jul 2022</div>
+      </div>
+      <div class="edu-row">
+        <div class="left">Bachelor of Engineering in Computer Science (GPA: 3.5/4.0)</div>
+        <div class="right">Bangalore, India</div>
       </div>
     </div>
   </section>
