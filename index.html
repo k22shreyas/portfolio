@@ -1,344 +1,827 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Shreyas Karanam | Portfolio</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shreyas Karanam - Software Engineer</title>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Serif:wght@400;600;700&display=swap" rel="stylesheet">
+  
   <style>
-    :root {
-      --crimson: #990000;
-      --cream: #EEEBDD;
-      --text: #333;
-    }
-
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: "Segoe UI", Tahoma, sans-serif;
+      box-sizing: border-box;
+    }
+
+    :root {
+      /* Professional color palette */
+      --white: #FFFFFF;
+      --off-white: #F8F9FA;
+      --light-gray: #E9ECEF;
+      --medium-gray: #ADB5BD;
+      --dark-gray: #495057;
+      --charcoal: #212529;
+      --accent: #2C5F8D;
+      --accent-light: #4A7BA7;
+      --accent-dark: #1A3A52;
+      --shadow-sm: rgba(0, 0, 0, 0.05);
+      --shadow-md: rgba(0, 0, 0, 0.08);
+      --shadow-lg: rgba(0, 0, 0, 0.12);
     }
 
     body {
-      background-color: var(--cream);
-      color: var(--text);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      font-family: 'IBM Plex Sans', -apple-system, sans-serif;
+      background: var(--white);
+      color: var(--charcoal);
+      overflow-x: hidden;
+      line-height: 1.65;
+      font-weight: 400;
     }
 
-    nav {
+    #root {
       width: 100%;
-      background-color: var(--crimson);
-      display: flex;
-      justify-content: center;
-      padding: 1rem 0;
-      position: sticky;
-      top: 0;
-      z-index: 10;
+      min-height: 100vh;
     }
 
-    nav ul {
-      display: flex;
-      list-style: none;
-      gap: 2rem;
-      flex-wrap: wrap;
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
     }
 
-    nav a {
-      text-decoration: none;
-      color: var(--cream);
-      font-weight: bold;
-      font-size: 1.1rem;
-      transition: opacity 0.3s;
+    ::-webkit-scrollbar-track {
+      background: var(--off-white);
     }
 
-    nav a:hover {
-      opacity: 0.7;
-    }
-
-    header {
-      text-align: center;
-      margin-top: 2rem;
-      padding: 2rem;
-    }
-
-    .profile-pic {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid var(--crimson);
-      margin-bottom: 1rem;
-    }
-
-    h1 {
-      font-size: 2rem;
-      color: var(--crimson);
-      margin-bottom: 0.5rem;
-    }
-
-    .subtitle {
-      font-size: 1rem;
-      color: #555;
-      margin-bottom: 1rem;
-    }
-
-    p {
-      max-width: 800px;
-      margin: 1rem auto;
-      line-height: 1.6;
-      font-size: 1rem;
-    }
-
-    section {
-      max-width: 900px;
-      width: 90%;
-      margin: 2rem auto;
-      padding: 1.5rem;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      scroll-margin-top: 80px;
-    }
-
-    section h2 {
-      margin-bottom: 1rem;
-      color: var(--crimson);
-      border-bottom: 2px solid var(--crimson);
-      padding-bottom: 0.5rem;
-    }
-
-    ul {
-      margin-left: 1.5rem;
-      line-height: 1.6;
-    }
-
-    a {
-      color: var(--crimson);
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .education-item, .experience-item, .project-item {
-      margin-bottom: 1rem;
-    }
-
-    .title-line {
-      font-weight: bold;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-
-    .title-line span {
-      font-weight: normal;
-      font-size: 0.95rem;
-      color: #666;
-    }
-
-    .edu-entry {
-      margin-bottom: 1.5rem;
-    }
-    
-    .edu-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      flex-wrap: wrap;
-    }
-    
-    .edu-row .left {
-      font-weight: 600;
-    }
-    
-    .edu-row .right {
-      font-size: 0.95rem;
-      color: #555;
-      text-align: right;
-    }
-    
-    .edu-row + .edu-row {
-      margin-top: 0.25rem;
-      font-weight: normal;
-    }
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 0.75rem;
-      margin-top: 0.5rem;
-    }
-
-    .skills-grid div {
-      background-color: var(--cream);
-      padding: 0.5rem;
-      border-left: 4px solid var(--crimson);
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent);
       border-radius: 4px;
     }
 
-    footer {
-      text-align: center;
-      padding: 0.5rem;
-      background-color: var(--crimson);
-      color: var(--cream);
-      margin-top: 2rem;
-      font-size: 0.8rem;
-      opacity: 0.8;
+    /* Subtle animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    .contact-info {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .contact-info a {
-      word-break: break-all;
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
   </style>
 </head>
 <body>
+  <div id="root"></div>
 
-  <!-- Navbar -->
-  <nav>
-    <ul>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#experience">Work Experience</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+  <script type="text/babel">
+    const { useState, useEffect } = React;
 
-  <!-- Header -->
-  <header>
-    <img src="https://drive.google.com/file/d/1TumT9OrWq_PIpc63pVzFSVN4VCp0arVE/view?usp=drive_link" alt="Profile Picture" class="profile-pic" />
-    <h1>Shreyas Karanam</h1>
-    <p class="subtitle">Aspiring Software Engineer | Computer Science @ Indiana University</p>
-    <p>Welcome to my personal portfolio! I'm passionate about learning, building scalable systems, and contributing to impactful projects. Below, you’ll find my education, skills, experience, and personal work.</p>
-  </header>
+    // Navigation Menu
+    const Navigation = ({ isOpen, toggleMenu, scrollToSection }) => {
+      const navStyle = {
+        position: 'fixed',
+        top: 0,
+        right: isOpen ? 0 : '-100%',
+        width: '100%',
+        maxWidth: '320px',
+        height: '100vh',
+        background: 'var(--charcoal)',
+        zIndex: 1000,
+        transition: 'right 0.3s ease',
+        padding: '100px 40px',
+        boxShadow: '-4px 0 20px var(--shadow-lg)'
+      };
 
-  <!-- Education -->
-  <section id="education">
-  <h2>Education</h2>
-    <div class="edu-entry">
-      <div class="edu-row">
-        <div class="left">Indiana University Bloomington</div>
-        <div class="right">Aug 2025 – May 2027</div>
-      </div>
-      <div class="edu-row">
-        <div class="left">Master of Science in Computer Science (GPA: 3.5/4.0)</div>
-        <div class="right">Bloomington, Indiana, USA</div>
-      </div>
-    </div>
-  
-    <div class="edu-entry">
-      <div class="edu-row">
-        <div class="left">Visveshwaraiah Technological University</div>
-        <div class="right">Aug 2018 – Jul 2022</div>
-      </div>
-      <div class="edu-row">
-        <div class="left">Bachelor of Engineering in Computer Science (GPA: 3.5/4.0)</div>
-        <div class="right">Bangalore, India</div>
-      </div>
-    </div>
-  </section>
+      const overlayStyle = {
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100vh',
+        background: 'rgba(0,0,0,0.4)',
+        zIndex: 999,
+        display: isOpen ? 'block' : 'none',
+        animation: 'fadeIn 0.2s ease'
+      };
 
-  <!-- Skills -->
-  <section id="skills">
-    <h2>Skills</h2>
-    <div class="skills-grid">
-      <div><strong>Programming & Systems:</strong> C++ (v11/v14/v17), Python, Shell, Java, 5G & Network Protocols</div>
-      <div><strong>Frameworks & Databases:</strong> PySpark, Hadoop, PostgreSQL, Node.js, React.js, Express.js, MongoDB, HTML/CSS</div>
-      <div><strong>DevOps & Cloud:</strong> Linux, Git, Jenkins, Docker, Kubernetes, AWS, CI/CD</div>
-      <div><strong>Tools & Testing:</strong> GTest, FUSE, Selenium, Cypress, Playwright, REST APIs</div>
-    </div>
-  </section>
+      const navItems = [
+        { label: 'Home', id: 'hero' },
+        { label: 'About', id: 'about' },
+        { label: 'Experience', id: 'work' },
+        { label: 'Projects', id: 'projects' },
+        { label: 'Contact', id: 'contact' }
+      ];
 
-  <!-- Experience -->
-  <section id="experience">
-    <h2>Work Experience</h2>
+      return (
+        <>
+          <div style={overlayStyle} onClick={toggleMenu} />
+          <nav style={navStyle}>
+            <div style={{ 
+              display: 'flex', 
+              flexDirection: 'column', 
+              gap: '24px'
+            }}>
+              {navItems.map((item, idx) => (
+                <a
+                  key={item.id}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection(item.id);
+                    toggleMenu();
+                  }}
+                  style={{
+                    color: 'var(--light-gray)',
+                    textDecoration: 'none',
+                    fontSize: '1.25rem',
+                    fontWeight: '500',
+                    cursor: 'pointer',
+                    transition: 'color 0.2s ease',
+                    letterSpacing: '0.02em'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.target.style.color = 'white';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.color = 'var(--light-gray)';
+                  }}
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          </nav>
+        </>
+      );
+    };
 
-    <div class="experience-item">
-      <div class="title-line">
-        <div>Graduate Teaching Assistant — Indiana University Bloomington</div>
-        <span>Aug 2025 – Present | Indiana, USA</span>
-      </div>
-      <ul>
-        <li>Assisting professors mentoring Informatics capstone teams (PHP, MySQL, UI/UX).</li>
-        <li>Scrum Master: planning weekly stand-ups and tracking project progress.</li>
-        <li>Supporting students with technical challenges & collaboration guidance.</li>
-      </ul>
-    </div>
+    // Menu Button
+    const MenuButton = ({ isOpen, onClick }) => {
+      const buttonStyle = {
+        position: 'fixed',
+        top: '32px',
+        right: '32px',
+        width: '48px',
+        height: '48px',
+        background: 'var(--charcoal)',
+        border: 'none',
+        borderRadius: '4px',
+        cursor: 'pointer',
+        zIndex: 1001,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '5px',
+        transition: 'all 0.2s ease'
+      };
 
-    <div class="experience-item">
-      <div class="title-line">
-        <div>Software Engineer — Nokia Solutions and Networks</div>
-        <span>Oct 2024 – Jul 2025 | Bangalore, India</span>
-      </div>
-      <ul>
-        <li>Developed Supercell feature for 5G gNodeB User-Plane scheduler in C++.</li>
-        <li>Maintained Unit/System tests using FUSE, increasing coverage & early detection.</li>
-        <li>Extended L1/L2 stubs for integration testing and debugged with Wireshark & gdb.</li>
-      </ul>
-    </div>
+      const lineStyle = {
+        width: '20px',
+        height: '2px',
+        background: 'white',
+        borderRadius: '2px',
+        transition: 'all 0.2s ease'
+      };
 
-    <div class="experience-item">
-      <div class="title-line">
-        <div>Associate Software Engineer — Bosch Global Software Technologies</div>
-        <span>Aug 2022 – Sep 2024 | Bangalore, India</span>
-      </div>
-      <ul>
-        <li>Integrated HMI features (Bluetooth/Wi-Fi) enabling iOS/Android connectivity.</li>
-        <li>Developed back-end in C++ for HMI APIs and vehicle interface systems.</li>
-        <li>Handled development server incidents ensuring minimal downtime.</li>
-      </ul>
-    </div>
-  </section>
+      return (
+        <button 
+          style={buttonStyle} 
+          onClick={onClick}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = 'var(--accent)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = 'var(--charcoal)';
+          }}
+        >
+          <div style={{
+            ...lineStyle,
+            transform: isOpen ? 'rotate(45deg) translateY(7px)' : 'none'
+          }} />
+          <div style={{
+            ...lineStyle,
+            opacity: isOpen ? 0 : 1
+          }} />
+          <div style={{
+            ...lineStyle,
+            transform: isOpen ? 'rotate(-45deg) translateY(-7px)' : 'none'
+          }} />
+        </button>
+      );
+    };
 
-  <!-- Projects -->
-  <section id="projects">
-    <h2>Personal Projects</h2>
+    // Hero Section
+    const HeroSection = () => {
+      return (
+        <section id="hero" style={{
+          minHeight: '100vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '120px 24px 80px',
+          background: 'var(--white)'
+        }}>
+          <div style={{
+            maxWidth: '960px',
+            width: '100%'
+          }}>
+            {/* Profile Image */}
+            <div style={{
+              width: '140px',
+              height: '140px',
+              margin: '0 0 32px 0',
+              borderRadius: '50%',
+              overflow: 'hidden',
+              border: '3px solid var(--light-gray)',
+              boxShadow: '0 4px 12px var(--shadow-md)'
+            }}>
+              <img 
+                src="https://drive.google.com/uc?export=view&id=1TumT9OrWq_PIpc63pVzFSVN4VCp0arVE"
+                alt="Shreyas Karanam"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover'
+                }}
+                onError={(e) => {
+                  e.target.parentElement.style.background = 'var(--accent)';
+                  e.target.style.display = 'none';
+                }}
+              />
+            </div>
 
-    <div class="project-item">
-      <div class="title-line">
-        <div><strong>Automated Result Analysis</strong> — Python, Flask, Selenium, Google OCR</div>
-      </div>
-      <ul>
-        <li>Automated tool to retrieve and analyze university results.</li>
-        <li>Used Tesseract-OCR for CAPTCHA and Flask for interactive frontend.</li>
-      </ul>
-    </div>
+            <h1 style={{
+              fontSize: 'clamp(2.5rem, 6vw, 4rem)',
+              fontWeight: '700',
+              marginBottom: '16px',
+              fontFamily: "'IBM Plex Serif', serif",
+              color: 'var(--charcoal)',
+              lineHeight: 1.15,
+              letterSpacing: '-0.02em'
+            }}>
+              Shreyas Karanam
+            </h1>
 
-    <div class="project-item">
-      <div class="title-line">
-        <div><strong>Ristorante</strong> — NodeJS, MongoDB, ReactJS, REST API</div>
-      </div>
-      <ul>
-        <li>Developed a scalable web app for restaurant reviews.</li>
-        <li>Used Node.js + Express + MongoDB backend and ReactJS frontend.</li>
-      </ul>
-    </div>
-  </section>
+            <p style={{
+              fontSize: 'clamp(1.25rem, 2.5vw, 1.5rem)',
+              color: 'var(--dark-gray)',
+              marginBottom: '24px',
+              fontWeight: '400',
+              lineHeight: 1.5
+            }}>
+              Software Engineer specializing in distributed systems and high-performance applications
+            </p>
 
-  <!-- Contact -->
-  <section id="contact">
-    <h2>Contact</h2>
-    <div class="contact-info">
-      <div><strong>Email:</strong> <a href="mailto:skarana@iu.edu">skarana@iu.edu</a> | <a href="mailto:k22shreyas@gmail.com">k22shreyas@gmail.com</a></div>
-      <div><strong>Phone:</strong> <a href="tel:+18126793360">+1 (812) 679-3360</a></div>
-      <div><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/k22shreyas" target="_blank">linkedin.com/in/k22shreyas</a></div>
-      <div><strong>GitHub:</strong> <a href="https://github.com/k22shreyas" target="_blank">github.com/k22shreyas</a></div>
-    </div>
-  </section>
+            <div style={{
+              display: 'flex',
+              gap: '12px',
+              marginBottom: '40px',
+              flexWrap: 'wrap'
+            }}>
+              {['C++', '5G Systems', 'Full Stack', 'Cloud Infrastructure'].map((tag, idx) => (
+                <span key={idx} style={{
+                  padding: '8px 16px',
+                  background: 'var(--off-white)',
+                  borderRadius: '4px',
+                  fontSize: '0.875rem',
+                  color: 'var(--dark-gray)',
+                  fontWeight: '500',
+                  letterSpacing: '0.01em'
+                }}>
+                  {tag}
+                </span>
+              ))}
+            </div>
 
-  <footer>
-    &copy; 2025 Shreyas Karanam. All Rights Reserved.
-  </footer>
+            <div style={{
+              display: 'flex',
+              gap: '16px',
+              flexWrap: 'wrap'
+            }}>
+              <a href="#contact" style={{
+                padding: '14px 28px',
+                background: 'var(--accent)',
+                color: 'white',
+                textDecoration: 'none',
+                borderRadius: '4px',
+                fontWeight: '500',
+                fontSize: '1rem',
+                transition: 'all 0.2s ease',
+                display: 'inline-block'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.background = 'var(--accent-dark)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.background = 'var(--accent)';
+              }}>
+                Get in Touch
+              </a>
+              <a href="#work" style={{
+                padding: '14px 28px',
+                background: 'transparent',
+                color: 'var(--accent)',
+                textDecoration: 'none',
+                borderRadius: '4px',
+                fontWeight: '500',
+                fontSize: '1rem',
+                border: '2px solid var(--accent)',
+                transition: 'all 0.2s ease',
+                display: 'inline-block'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.background = 'var(--accent)';
+                e.target.style.color = 'white';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.background = 'transparent';
+                e.target.style.color = 'var(--accent)';
+              }}>
+                View Experience
+              </a>
+            </div>
+          </div>
+        </section>
+      );
+    };
 
+    // About Section
+    const AboutSection = () => {
+      return (
+        <section id="about" style={{
+          padding: '80px 24px',
+          background: 'var(--off-white)'
+        }}>
+          <div style={{
+            maxWidth: '960px',
+            margin: '0 auto'
+          }}>
+            <h2 style={{
+              fontSize: 'clamp(1.75rem, 4vw, 2.25rem)',
+              fontWeight: '700',
+              marginBottom: '32px',
+              fontFamily: "'IBM Plex Serif', serif",
+              color: 'var(--charcoal)'
+            }}>
+              About Me
+            </h2>
+
+            <div style={{
+              fontSize: '1.125rem',
+              lineHeight: '1.8',
+              color: 'var(--dark-gray)',
+              marginBottom: '48px'
+            }}>
+              <p style={{ marginBottom: '24px' }}>
+                I'm a software engineer with a focus on building scalable, high-performance systems. Currently pursuing my Master's in Computer Science at Indiana University while working as a Graduate Teaching Assistant.
+              </p>
+              <p style={{ marginBottom: '24px' }}>
+                My professional experience includes developing 5G infrastructure at Nokia and automotive connectivity solutions at Bosch. I specialize in C++ development, distributed systems, and cloud architecture.
+              </p>
+              <p>
+                I'm passionate about solving complex technical challenges and creating software that makes a real-world impact.
+              </p>
+            </div>
+
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+              gap: '24px'
+            }}>
+              {[
+                { label: 'Experience', value: '3+ Years' },
+                { label: 'Education', value: 'MS in CS' },
+                { label: 'Location', value: 'Bloomington, IN' },
+                { label: 'Status', value: 'Available' }
+              ].map((item, idx) => (
+                <div key={idx} style={{
+                  padding: '24px',
+                  background: 'white',
+                  borderRadius: '4px',
+                  borderLeft: '3px solid var(--accent)'
+                }}>
+                  <div style={{
+                    fontSize: '0.875rem',
+                    color: 'var(--medium-gray)',
+                    marginBottom: '8px',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.05em',
+                    fontWeight: '500'
+                  }}>
+                    {item.label}
+                  </div>
+                  <div style={{
+                    fontSize: '1.25rem',
+                    color: 'var(--charcoal)',
+                    fontWeight: '600'
+                  }}>
+                    {item.value}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    // Work Experience Section
+    const WorkSection = () => {
+      const experiences = [
+        {
+          role: 'Graduate Teaching Assistant',
+          company: 'Indiana University Bloomington',
+          period: 'Aug 2025 – Present',
+          description: 'Mentoring Informatics capstone teams through software development lifecycle. Leading sprint planning sessions and providing technical guidance for student projects.'
+        },
+        {
+          role: 'Software Engineer',
+          company: 'Nokia Solutions and Networks',
+          period: 'Oct 2024 – Jul 2025',
+          description: 'Developed user plane scheduler features in C++ for 5G gNodeB infrastructure. Maintained comprehensive test suites and improved automation workflows.'
+        },
+        {
+          role: 'Associate Software Engineer',
+          company: 'Bosch Global Software',
+          period: 'Aug 2022 – Sep 2024',
+          description: 'Built backend components for automotive connectivity systems. Reduced server recovery time by 40% and integrated mobile telematics features.'
+        }
+      ];
+
+      return (
+        <section id="work" style={{
+          padding: '80px 24px',
+          background: 'var(--white)'
+        }}>
+          <div style={{
+            maxWidth: '960px',
+            margin: '0 auto'
+          }}>
+            <h2 style={{
+              fontSize: 'clamp(1.75rem, 4vw, 2.25rem)',
+              fontWeight: '700',
+              marginBottom: '48px',
+              fontFamily: "'IBM Plex Serif', serif",
+              color: 'var(--charcoal)'
+            }}>
+              Experience
+            </h2>
+
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '40px'
+            }}>
+              {experiences.map((exp, idx) => (
+                <div key={idx} style={{
+                  paddingBottom: '40px',
+                  borderBottom: idx !== experiences.length - 1 ? '1px solid var(--light-gray)' : 'none'
+                }}>
+                  <div style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'baseline',
+                    marginBottom: '12px',
+                    flexWrap: 'wrap',
+                    gap: '12px'
+                  }}>
+                    <h3 style={{
+                      fontSize: '1.375rem',
+                      fontWeight: '600',
+                      color: 'var(--charcoal)',
+                      fontFamily: "'IBM Plex Serif', serif"
+                    }}>
+                      {exp.role}
+                    </h3>
+                    <span style={{
+                      fontSize: '0.875rem',
+                      color: 'var(--medium-gray)',
+                      fontWeight: '500'
+                    }}>
+                      {exp.period}
+                    </span>
+                  </div>
+                  <div style={{
+                    fontSize: '1.125rem',
+                    color: 'var(--accent)',
+                    marginBottom: '16px',
+                    fontWeight: '500'
+                  }}>
+                    {exp.company}
+                  </div>
+                  <p style={{
+                    fontSize: '1rem',
+                    lineHeight: '1.7',
+                    color: 'var(--dark-gray)'
+                  }}>
+                    {exp.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    // Projects Section
+    const ProjectsSection = () => {
+      const projects = [
+        {
+          name: 'Automated Result Analysis',
+          description: 'Developed a tool for retrieving and analyzing university exam results using OCR technology. Built with Python, Flask, and Selenium for automated data extraction and visualization.',
+          tech: ['Python', 'Flask', 'Selenium', 'OCR']
+        },
+        {
+          name: 'Ristorante',
+          description: 'Full-stack restaurant review platform featuring real-time updates and RESTful API architecture. Implemented with Node.js backend and React frontend.',
+          tech: ['Node.js', 'React', 'MongoDB', 'Express']
+        }
+      ];
+
+      return (
+        <section id="projects" style={{
+          padding: '80px 24px',
+          background: 'var(--off-white)'
+        }}>
+          <div style={{
+            maxWidth: '960px',
+            margin: '0 auto'
+          }}>
+            <h2 style={{
+              fontSize: 'clamp(1.75rem, 4vw, 2.25rem)',
+              fontWeight: '700',
+              marginBottom: '48px',
+              fontFamily: "'IBM Plex Serif', serif",
+              color: 'var(--charcoal)'
+            }}>
+              Projects
+            </h2>
+
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gap: '32px'
+            }}>
+              {projects.map((project, idx) => (
+                <div key={idx} style={{
+                  background: 'white',
+                  padding: '32px',
+                  borderRadius: '4px',
+                  borderTop: '3px solid var(--accent)',
+                  boxShadow: '0 2px 8px var(--shadow-sm)',
+                  transition: 'all 0.2s ease'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.boxShadow = '0 8px 24px var(--shadow-md)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.boxShadow = '0 2px 8px var(--shadow-sm)';
+                }}>
+                  <h3 style={{
+                    fontSize: '1.25rem',
+                    fontWeight: '600',
+                    marginBottom: '16px',
+                    color: 'var(--charcoal)',
+                    fontFamily: "'IBM Plex Serif', serif"
+                  }}>
+                    {project.name}
+                  </h3>
+                  <p style={{
+                    fontSize: '1rem',
+                    lineHeight: '1.7',
+                    color: 'var(--dark-gray)',
+                    marginBottom: '20px'
+                  }}>
+                    {project.description}
+                  </p>
+                  <div style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    gap: '8px'
+                  }}>
+                    {project.tech.map((tech, tIdx) => (
+                      <span key={tIdx} style={{
+                        padding: '6px 12px',
+                        background: 'var(--off-white)',
+                        borderRadius: '3px',
+                        fontSize: '0.8125rem',
+                        color: 'var(--dark-gray)',
+                        fontWeight: '500'
+                      }}>
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    // Skills Section
+    const SkillsSection = () => {
+      const skillCategories = [
+        { title: 'Languages', skills: ['C++ (11/14/17)', 'Python', 'JavaScript', 'SQL'] },
+        { title: 'Frameworks', skills: ['React', 'Node.js', 'Flask', 'Express'] },
+        { title: 'Databases', skills: ['PostgreSQL', 'MongoDB', 'Redis'] },
+        { title: 'DevOps', skills: ['Docker', 'Kubernetes', 'AWS', 'CI/CD'] },
+        { title: 'Big Data', skills: ['PySpark', 'Hadoop', 'Kafka'] }
+      ];
+
+      return (
+        <section style={{
+          padding: '80px 24px',
+          background: 'var(--white)'
+        }}>
+          <div style={{
+            maxWidth: '960px',
+            margin: '0 auto'
+          }}>
+            <h2 style={{
+              fontSize: 'clamp(1.75rem, 4vw, 2.25rem)',
+              fontWeight: '700',
+              marginBottom: '48px',
+              fontFamily: "'IBM Plex Serif', serif",
+              color: 'var(--charcoal)'
+            }}>
+              Technical Skills
+            </h2>
+
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+              gap: '32px'
+            }}>
+              {skillCategories.map((category, idx) => (
+                <div key={idx}>
+                  <h3 style={{
+                    fontSize: '1rem',
+                    fontWeight: '600',
+                    marginBottom: '16px',
+                    color: 'var(--accent)',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.05em'
+                  }}>
+                    {category.title}
+                  </h3>
+                  <div style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '8px'
+                  }}>
+                    {category.skills.map((skill, sIdx) => (
+                      <div key={sIdx} style={{
+                        fontSize: '0.9375rem',
+                        color: 'var(--dark-gray)',
+                        fontWeight: '400'
+                      }}>
+                        {skill}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    // Contact Section
+    const ContactSection = () => {
+      return (
+        <section id="contact" style={{
+          padding: '80px 24px',
+          background: 'var(--off-white)'
+        }}>
+          <div style={{
+            maxWidth: '960px',
+            margin: '0 auto'
+          }}>
+            <h2 style={{
+              fontSize: 'clamp(1.75rem, 4vw, 2.25rem)',
+              fontWeight: '700',
+              marginBottom: '24px',
+              fontFamily: "'IBM Plex Serif', serif",
+              color: 'var(--charcoal)'
+            }}>
+              Get in Touch
+            </h2>
+
+            <p style={{
+              fontSize: '1.125rem',
+              lineHeight: '1.7',
+              color: 'var(--dark-gray)',
+              marginBottom: '48px',
+              maxWidth: '640px'
+            }}>
+              I'm currently open to new opportunities and collaborations. Feel free to reach out if you'd like to discuss a project or just connect.
+            </p>
+
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+              gap: '24px',
+              marginBottom: '48px'
+            }}>
+              {[
+                { label: 'Email', value: 'skarana@iu.edu', href: 'mailto:skarana@iu.edu' },
+                { label: 'Phone', value: '+1 (812) 679-3360', href: 'tel:+18126793360' },
+                { label: 'LinkedIn', value: 'linkedin.com/in/k22shreyas', href: 'https://linkedin.com/in/k22shreyas' },
+                { label: 'GitHub', value: 'github.com/k22shreyas', href: 'https://github.com/k22shreyas' }
+              ].map((contact, idx) => (
+                <a key={idx} href={contact.href} target={contact.href.startsWith('http') ? '_blank' : '_self'} rel="noopener noreferrer" style={{
+                  display: 'block',
+                  padding: '24px',
+                  background: 'white',
+                  borderRadius: '4px',
+                  textDecoration: 'none',
+                  borderLeft: '3px solid var(--accent)',
+                  transition: 'all 0.2s ease'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.boxShadow = '0 4px 12px var(--shadow-md)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.boxShadow = 'none';
+                }}>
+                  <div style={{
+                    fontSize: '0.875rem',
+                    color: 'var(--medium-gray)',
+                    marginBottom: '8px',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.05em',
+                    fontWeight: '500'
+                  }}>
+                    {contact.label}
+                  </div>
+                  <div style={{
+                    fontSize: '1rem',
+                    color: 'var(--accent)',
+                    fontWeight: '500'
+                  }}>
+                    {contact.value}
+                  </div>
+                </a>
+              ))}
+            </div>
+
+            <div style={{
+              paddingTop: '48px',
+              borderTop: '1px solid var(--light-gray)',
+              textAlign: 'center',
+              color: 'var(--medium-gray)',
+              fontSize: '0.875rem'
+            }}>
+              <p>© 2025 Shreyas Karanam. Based in Bloomington, Indiana.</p>
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    // Main App
+    const App = () => {
+      const [menuOpen, setMenuOpen] = useState(false);
+
+      const toggleMenu = () => setMenuOpen(!menuOpen);
+
+      const scrollToSection = (id) => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      };
+
+      return (
+        <>
+          <MenuButton isOpen={menuOpen} onClick={toggleMenu} />
+          <Navigation isOpen={menuOpen} toggleMenu={toggleMenu} scrollToSection={scrollToSection} />
+          <HeroSection />
+          <AboutSection />
+          <WorkSection />
+          <ProjectsSection />
+          <SkillsSection />
+          <ContactSection />
+        </>
+      );
+    };
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
 </body>
 </html>
